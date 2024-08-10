@@ -1,14 +1,16 @@
 package com.example.wordventure.user
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.MainActivity
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.User
@@ -17,6 +19,8 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
+
+    private var isvalidId = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,23 +36,27 @@ class RegisterActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkIdBtn.isEnabled = !s.isNullOrEmpty()
+                isvalidId = false // 아이디 변경되면 isvalidId false로 설정
+                registerBtn.isEnabled = false // isvalidId false일 때 회원가입 버튼 비활성화
             }
             override fun afterTextChanged(s: Editable?) {}
         })
 
         checkIdBtn.setOnClickListener {
             val id = inputId.text.toString()
-            checkIdAvailability(id)
+            checkIdAvailability(id, registerBtn)
         }
 
         registerBtn.setOnClickListener {
             val id = inputId.text.toString()
             val passwd = inputPasswd.text.toString()
             val user = User(id, passwd)
-            if(id=="" || passwd=="") {
-                Toast.makeText(this@RegisterActivity, "아이디와 비밀번호 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
-            } else {
+            if(id.isEmpty() || passwd.isEmpty()) {
+                showAlertDialog("아이디와 비밀번호 모두 입력해주세요.")
+            } else if (isvalidId) {
                 addUser(user)
+            } else {
+                showAlertDialog("아이디 중복 확인을 완료해주세요.")
             }
         }
 
@@ -68,7 +76,7 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
-    private fun checkIdAvailability(id: String) {
+    private fun checkIdAvailability(id: String, registerBtn: Button) {
         val call = RetrofitClient.apiService.checkId(id)
 
         call.enqueue(object : Callback<Boolean> {
@@ -76,9 +84,13 @@ class RegisterActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val available = response.body() ?: false
                     if (available) {
-                        Toast.makeText(this@RegisterActivity, "ID is available", Toast.LENGTH_SHORT).show()
+                        isvalidId = true // 아이디가 사용 가능하면 isvalidId = true
+                        registerBtn.isEnabled = true // 회원가입 버튼 활성화
+                        showAlertDialog("사용 가능한 아이디 입니다.")
                     } else {
-                        Toast.makeText(this@RegisterActivity, "ID is already taken", Toast.LENGTH_SHORT).show()
+                        isvalidId = false
+                        registerBtn.isEnabled = false
+                        showAlertDialog("중복된 아이디 입니다.")
                     }
                 } else {
                     Toast.makeText(this@RegisterActivity, "Server error", Toast.LENGTH_SHORT).show()
@@ -97,7 +109,7 @@ class RegisterActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Unit> {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@RegisterActivity, "User added successfully", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                 } else {
                     Toast.makeText(this@RegisterActivity, "Failed to add user", Toast.LENGTH_SHORT).show()
                 }
@@ -113,5 +125,15 @@ class RegisterActivity : AppCompatActivity() {
         val passwordPattern = "^(?=.*[0-9])(?=.*[!@#\$%^&*()_+=-]).{8,}\$"
         val pattern = Regex(passwordPattern)
         return pattern.matches(password)
+    }
+
+    private fun showAlertDialog(msg: String) {
+        AlertDialog.Builder(this).apply {
+            setTitle("알림")
+            setMessage(msg)
+            setPositiveButton("확인", null)
+            create()
+            show()
+        }
     }
 }

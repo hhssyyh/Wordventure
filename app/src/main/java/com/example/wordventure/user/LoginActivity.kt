@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.MainActivity
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.User
@@ -43,9 +45,9 @@ class LoginActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Unit> {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 } else {
-                    Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                    showAlertDialog("아이디나 비밀번호가 잘못되었습니다.")
                 }
             }
 
@@ -53,5 +55,15 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Network error", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun showAlertDialog(msg: String) {
+        AlertDialog.Builder(this).apply {
+            setTitle("알림")
+            setMessage(msg)
+            setPositiveButton("확인", null)
+            create()
+            show()
+        }
     }
 }

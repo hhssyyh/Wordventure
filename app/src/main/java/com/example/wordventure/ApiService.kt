@@ -18,6 +18,6 @@ interface ApiService {
     fun addUsers(@Body user: User): Call<Unit>
 
     // 로그인
-    @POST("login")
+    @POST("/login")
     fun login(@Body user: User): Call<Unit>
 }
