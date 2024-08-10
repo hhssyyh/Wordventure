@@ -16,6 +16,7 @@ import com.example.wordventure.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.util.Log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         val gotoRegisterButton = findViewById<Button>(R.id.gotoRegister)
 
         loginBtn.setOnClickListener {
-            val id = inputId.toString()
-            val passwd = inputPasswd.toString()
+            val id = inputId.text.toString()
+            val passwd = inputPasswd.text.toString()
             val user = User(id, passwd)
             login(user)
         }
