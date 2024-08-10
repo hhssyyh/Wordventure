@@ -16,6 +16,14 @@ class MainActivity : AppCompatActivity() {
         val gotoLoginButton = findViewById<Button>(R.id.gotoLogin)
         val gotoRegisterButton = findViewById<Button>(R.id.gotoRegister)
 
+        // 로그인되어 있지 않으면 로그인 화면으로 이동
+//        if (!TokenManager.isLoggedIn(this)) {
+//            val intent = Intent(this, LoginActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        } else {
+//        }
+
         gotoLoginButton.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)

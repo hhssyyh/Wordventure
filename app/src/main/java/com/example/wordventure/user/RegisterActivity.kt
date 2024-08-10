@@ -109,6 +109,7 @@ class RegisterActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Unit> {
             override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                 if (response.isSuccessful) {
+                    showAlertDialog("회원가입이 완료되었습니다.")
                     startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
                 } else {
                     Toast.makeText(this@RegisterActivity, "Failed to add user", Toast.LENGTH_SHORT).show()

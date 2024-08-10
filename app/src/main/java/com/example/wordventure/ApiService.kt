@@ -8,6 +8,8 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
+data class LoginResponse(val token: String)
+
 interface ApiService {
     // ID 중복 확인
     @GET("/checkId")
@@ -19,5 +21,5 @@ interface ApiService {
 
     // 로그인
     @POST("/login")
-    fun login(@Body user: User): Call<Unit>
+    fun login(@Body user: User): Call<LoginResponse>
 }
