@@ -2,45 +2,37 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainPage"
+    android:id="@+id/allFairy"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".fairytale.FairyIslandActivity">
 
     <ImageView
-        android:id="@+id/myIsland"
+        android:id="@+id/allFairyIsland"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/myisland"
-        android:contentDescription="@string/myIsland"
+        android:src="@drawable/all_fairy_island"
+        android:contentDescription="@string/allFairyIsland"
         android:scaleType="centerCrop"
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/gotoLogin"
+        android:id="@+id/gotoMain"
+        android:text="무인도"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loginBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/gotoRegister"
+        android:id="@+id/gotoFairyTale"
+        android:text="동화로"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/registerBtn"
-        app:layout_constraintTop_toBottomOf="@id/gotoLogin"
+        app:layout_constraintTop_toBottomOf="@id/gotoMain"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
-     <Button
-         android:id="@+id/gotoFairyIsland"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         app:layout_constraintTop_toBottomOf="@id/gotoRegister"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

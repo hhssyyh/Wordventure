@@ -26,6 +26,8 @@
 
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegisterActivity" />
-
+        <activity android:name=".user.LogoutActivity" />
+        <activity android:name=".fairytale.FairyIslandActivity" />
+        <activity android:name=".fairytale.FairytaleActivity" />
     </application>
 </manifest>

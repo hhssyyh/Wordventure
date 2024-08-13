@@ -8,12 +8,14 @@ import org.json.JSONObject
 object TokenManager {
     private const val PREF_NAME = "MelonUser"
     private const val AUTH_TOKEN = "AUTH_TOKEN"
+    private const val USER_ID = "USER_ID"
 
     // 토큰 저장
-    fun saveToken(context: Context, token: String) {
+    fun saveToken(context: Context, token: String, userId: String) {
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString(AUTH_TOKEN, token)
+        editor.putString(USER_ID, userId)
         editor.apply()
     }
 
@@ -23,11 +25,18 @@ object TokenManager {
         return sharedPreferences.getString(AUTH_TOKEN, null)
     }
 
-    // 토큰 삭제
+    // 유저 아이디 불러오기
+    fun getUserId(context: Context): String? {
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return sharedPreferences.getString(USER_ID, null)
+    }
+
+    // 토큰 및 유저 아이디 삭제
     fun clearToken(context: Context) {
         val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.remove(AUTH_TOKEN)
+        editor.remove(USER_ID)
         editor.apply()
     }
 
@@ -47,7 +56,7 @@ object TokenManager {
             if (shouldRefreshToken(token)) {
                 val newToken = requestNewTokenFromServer(token)
                 if (newToken != null) {
-                    saveToken(context, newToken)
+                    saveToken(context, newToken, getUserId(context).toString())
                 } else {
                     // 토큰 갱신 실패
                 }

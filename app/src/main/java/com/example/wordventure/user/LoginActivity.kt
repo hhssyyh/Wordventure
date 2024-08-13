@@ -2,6 +2,7 @@ package com.example.wordventure.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -16,7 +17,6 @@ import com.example.wordventure.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.util.Log
 
 class LoginActivity : AppCompatActivity() {
 
@@ -52,9 +52,11 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
                     token = loginResponse?.token ?: ""
+                    val userId = loginResponse?.sessionId ?: ""
                     // 토큰 저장
-                    TokenManager.saveToken(this@LoginActivity, token)
+                    TokenManager.saveToken(this@LoginActivity, token, userId)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    Log.d("LoginResponse", "LoginResponse: ${loginResponse}")
                 } else {
                     showAlertDialog("아이디나 비밀번호가 잘못되었습니다.")
                 }

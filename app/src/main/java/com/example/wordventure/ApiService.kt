@@ -1,5 +1,6 @@
 package com.example.wordventure
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -8,7 +9,12 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-data class LoginResponse(val token: String)
+data class LoginResponse(
+    @SerializedName("status") val status: Int,
+    @SerializedName("message") val message: String,
+    @SerializedName("sessionId") val sessionId: String?,
+    @SerializedName("token") val token: String?
+)
 
 interface ApiService {
     // ID 중복 확인
