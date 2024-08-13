@@ -2,20 +2,25 @@ package com.example.wordventure.user
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.LoginResponse
 import com.example.wordventure.MainActivity
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
+import com.example.wordventure.TokenManager
 import com.example.wordventure.User
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var token: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         val gotoRegisterButton = findViewById<Button>(R.id.gotoRegister)
 
         loginBtn.setOnClickListener {
-            val id = inputId.toString()
-            val passwd = inputPasswd.toString()
+            val id = inputId.text.toString()
+            val passwd = inputPasswd.text.toString()
             val user = User(id, passwd)
             login(user)
         }
@@ -42,16 +47,22 @@ class LoginActivity : AppCompatActivity() {
     private fun login(user: User) {
         val call = RetrofitClient.apiService.login(user)
 
-        call.enqueue(object : Callback<Unit> {
-            override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 if (response.isSuccessful) {
+                    val loginResponse = response.body()
+                    token = loginResponse?.token ?: ""
+                    val userId = loginResponse?.sessionId ?: ""
+                    // 토큰 저장
+                    TokenManager.saveToken(this@LoginActivity, token, userId)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                    Log.d("LoginResponse", "LoginResponse: ${loginResponse}")
                 } else {
                     showAlertDialog("아이디나 비밀번호가 잘못되었습니다.")
                 }
             }
 
-            override fun onFailure(call: Call<Unit>, t: Throwable) {
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Toast.makeText(this@LoginActivity, "Network error", Toast.LENGTH_SHORT).show()
             }
         })
