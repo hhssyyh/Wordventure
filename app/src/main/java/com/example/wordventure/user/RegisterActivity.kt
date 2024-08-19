@@ -126,7 +126,7 @@ class RegisterActivity : AppCompatActivity() {
         })
     }
 
-    // 회원가입
+    // 회원가입 (첫번째 에피소드 해금됨)
     private fun addUser(user: User) {
         val call = RetrofitClient.apiService.addUsers(user)
 
