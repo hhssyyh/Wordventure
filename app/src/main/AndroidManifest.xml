@@ -28,6 +28,8 @@
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.LogoutActivity" />
         <activity android:name=".fairytale.FairyIslandActivity" />
-        <activity android:name=".fairytale.FairytaleActivity" />
+        <activity android:name=".fairytale.PigActivity" />
+        <activity android:name=".fairytale.TurtleActivity" />
+        <activity android:name=".pigepisode.Episode1" />
     </application>
 </manifest>

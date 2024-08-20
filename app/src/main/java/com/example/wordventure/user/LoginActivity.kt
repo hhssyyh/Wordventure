@@ -56,7 +56,6 @@ class LoginActivity : AppCompatActivity() {
                     // 토큰 저장
                     TokenManager.saveToken(this@LoginActivity, token, userId)
                     startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                    Log.d("LoginResponse", "LoginResponse: ${loginResponse}")
                 } else {
                     showAlertDialog("아이디나 비밀번호가 잘못되었습니다.")
                 }

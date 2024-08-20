@@ -4,4 +4,5 @@
     <string name="allFairyIsland">allFairyIsland</string>
     <string name="loginBtn">로그인</string>
     <string name="registerBtn">회원가입</string>
+    <string name="logoutBtn">로그아웃</string>
 </resources>
