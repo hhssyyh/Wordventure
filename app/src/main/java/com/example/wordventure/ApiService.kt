@@ -14,6 +14,15 @@ data class LoginResponse(
     @SerializedName("token") val token: String?
 )
 
+data class OpenedEpiResponse(
+    @SerializedName("epi_no") val epiNo: Int?,
+//    @SerializedName("num_of_epi") val numOfEpi: Int?
+)
+
+data class OpenedFairyResponse(
+    @SerializedName("fairy_no") val fairyNo: Int?
+)
+
 interface ApiService {
     // ID 중복 확인
     @GET("/checkId")
@@ -28,10 +37,10 @@ interface ApiService {
     fun login(@Body user: User): Call<LoginResponse>
 
     // 동화 진행 상황
-    @GET("/openedFairy")
-    fun openedFairy(@Query("userId") userId: String?): Call<Int>
+    @GET("/FindUnlockFairy")
+    fun openedFairy(@Query("id") userId: String?): Call<OpenedFairyResponse>
 
     // 에피소드 진행 상황
     @GET("/FindUnlockEpi")
-    fun openedEpi(@Query("id") userId: String?, @Query("fairy_no") fairyNo: Int): Call<Int>
+    fun openedEpi(@Query("id") userId: String?, @Query("fairy_no") fairyNo: Int): Call<OpenedEpiResponse>
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/study_word"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".study.StudyActivity">
+
+    <!-- 상단 여백을 위한 Guideline -->
+    <!-- 차라리 padding을 주자 -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" /> <!-- 화면 상단에서 8% 떨어진 위치 -->
+
+    <ImageView
+        android:id="@+id/word_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/myIsland"
+        android:scaleType="centerCrop"
+        android:src="@drawable/pig_epi1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.213"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline_top"
+        app:layout_constraintDimensionRatio="139:173"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <TextView
+        android:id="@+id/word_eng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pig"
+        android:textSize="25dp"
+        app:layout_constraintStart_toEndOf="@+id/word_img"
+        app:layout_constraintTop_toTopOf="@+id/word_img" />
+
+    <TextView
+        android:id="@+id/word_kr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="돼지"
+        android:textSize="25dp"
+        app:layout_constraintStart_toEndOf="@+id/word_eng"
+        app:layout_constraintTop_toTopOf="@+id/word_eng" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

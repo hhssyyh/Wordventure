@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.wordventure.MainActivity
+import com.example.wordventure.OpenedEpiResponse
+import com.example.wordventure.OpenedFairyResponse
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.TokenManager
@@ -33,31 +35,23 @@ class FairyIslandActivity : AppCompatActivity() {
         val fairyTurtleBtn: ImageButton = findViewById(R.id.fairy_turtle)
 
         // 서버에서 동화 해금 정보 불러오기
-//        getOpenedFairy { openedFairyFromServer ->
-//            if (openedFairyFromServer != null) {
-//                openedFairy = openedFairyFromServer
-//            }
-//
-//            // 해금 정보에 따라 버튼 흑백 처리
-//            changeImageColor(fairyPigBtn, 1)
-//            changeImageColor(fairyTurtleBtn, 2)
-//
-//            fairyPigBtn.setOnClickListener {
-//                startFairy("PigActivity", 1)
-//            }
-//            fairyTurtleBtn.setOnClickListener {
-//                startFairy("TurtleActivity", 2)
-//            }
-//        }
+        getOpenedFairy { openedFairyFromServer ->
+            if (openedFairyFromServer != null) {
+                openedFairy = openedFairyFromServer
+            }
 
-        changeImageColor(fairyPigBtn, 1)
-        changeImageColor(fairyTurtleBtn, 2)
+            openedFairy = 1
 
-        fairyPigBtn.setOnClickListener {
-            startFairy("PigActivity", 1)
-        }
-        fairyTurtleBtn.setOnClickListener {
-            startFairy("TurtleActivity", 2)
+            // 해금 정보에 따라 버튼 흑백 처리
+            changeImageColor(fairyPigBtn, 1)
+            changeImageColor(fairyTurtleBtn, 2)
+
+            fairyPigBtn.setOnClickListener {
+                startFairy("pig", 1)
+            }
+            fairyTurtleBtn.setOnClickListener {
+                startFairy("turtle", 2)
+            }
         }
 
         gotoMainBtn.setOnClickListener {
@@ -71,16 +65,16 @@ class FairyIslandActivity : AppCompatActivity() {
         val userId = TokenManager.getUserId(this)
         val call = RetrofitClient.apiService.openedFairy(userId)
 
-        call.enqueue(object : Callback<Int> {
-            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+        call.enqueue(object : Callback<OpenedFairyResponse> {
+            override fun onResponse(call: Call<OpenedFairyResponse>, response: Response<OpenedFairyResponse>) {
                 if (response.isSuccessful) {
-                    callback(response.body())
+                    callback(response.body()?.fairyNo ?: 1)
                 } else {
                     Toast.makeText(this@FairyIslandActivity, "Server error", Toast.LENGTH_SHORT).show()
                     callback(null)
                 }
             }
-            override fun onFailure(call: Call<Int>, t: Throwable) {
+            override fun onFailure(call: Call<OpenedFairyResponse>, t: Throwable) {
                 Toast.makeText(this@FairyIslandActivity, "Network error", Toast.LENGTH_SHORT).show()
                 callback(null)
             }
@@ -104,20 +98,24 @@ class FairyIslandActivity : AppCompatActivity() {
     }
 
     // 해금 여부 확인 후 해당 동화 페이지로
-    private fun startFairy(pageName: String, buttonId: Int) {
+    private fun startFairy(fairyName: String, buttonId: Int) {
         if (buttonId > openedFairy) {
             showAlertDialog("먼저 이전 동화를 완료해주세요!")
         } else {
             try {
                 getOpenedEpi(buttonId) { data ->
                     if (data != null) {
-                        // 클래스 이름 생성
-                        val className = "com.example.wordventure.fairytale.$pageName"
+                        val className = "com.example.wordventure.fairytale.FairyActivity"
                         val episodeClass = Class.forName(className)
 
                         val intent = Intent(this, episodeClass)
-                        intent.putExtra("opened_epi", data)
+                        intent.putExtra("fairy_name", fairyName)  // 동화명 전달
+                        intent.putExtra("opened_epi", data.epiNo)  // 열린 에피소드 개수 전달
+//                        intent.putExtra("num_of_epi", data.numOfEpi)  // 총 에피소드 개수 전달
+                        intent.putExtra("num_of_epi", 10)
                         startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "Failed to fetch episode number", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: ClassNotFoundException) {
@@ -128,14 +126,13 @@ class FairyIslandActivity : AppCompatActivity() {
     }
 
     // 에피소드 해금 정보
-    private fun getOpenedEpi(fairyNo: Int, callback: (Int?) -> Unit) {
+    private fun getOpenedEpi(fairyNo: Int, callback: (OpenedEpiResponse?) -> Unit) {
         val userId = TokenManager.getUserId(this)
         val call = RetrofitClient.apiService.openedEpi(userId, fairyNo)
 
-        call.enqueue(object : Callback<Int> {
-            override fun onResponse(call: Call<Int>, response: Response<Int>) {
+        call.enqueue(object : Callback<OpenedEpiResponse> {
+            override fun onResponse(call: Call<OpenedEpiResponse>, response: Response<OpenedEpiResponse>) {
                 if (response.isSuccessful) {
-                    Log.d("FairyIslandActivity", "Response body: $response")
                     callback(response.body())
                 } else {
                     Log.d("FairyIslandActivity", "Response body: $response")
@@ -143,7 +140,7 @@ class FairyIslandActivity : AppCompatActivity() {
                     callback(null)
                 }
             }
-            override fun onFailure(call: Call<Int>, t: Throwable) {
+            override fun onFailure(call: Call<OpenedEpiResponse>, t: Throwable) {
                 Toast.makeText(this@FairyIslandActivity, "Network error", Toast.LENGTH_SHORT).show()
                 callback(null)
             }
