@@ -138,7 +138,7 @@ class RegisterActivity : AppCompatActivity() {
                         setMessage("회원가입이 완료되었습니다.")
                         setPositiveButton("확인") { dialog, _ ->
                             dialog.dismiss()
-                            startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                             finish()
                         }
                         create()

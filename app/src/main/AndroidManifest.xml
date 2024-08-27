@@ -27,9 +27,9 @@
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.LogoutActivity" />
-        <activity android:name=".fairytale.FairyIslandActivity" />
-        <activity android:name=".fairytale.PigActivity" />
-        <activity android:name=".fairytale.TurtleActivity" />
-        <activity android:name=".pigepisode.Episode1" />
+
+        <activity android:name=".fairytale.FairyIslandActivity"/>
+        <activity android:name=".fairytale.FairyActivity"/>
+        <activity android:name=".pig.Episode1" />
     </application>
 </manifest>
