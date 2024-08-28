@@ -2,14 +2,13 @@ package com.example.wordventure.user
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.BaseActivity
 import com.example.wordventure.LoginResponse
-import com.example.wordventure.MainActivity
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.TokenManager

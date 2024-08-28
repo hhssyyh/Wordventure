@@ -16,11 +16,16 @@ data class LoginResponse(
 
 data class OpenedEpiResponse(
     @SerializedName("epi_no") val epiNo: Int?,
-//    @SerializedName("num_of_epi") val numOfEpi: Int?
+    @SerializedName("total_episode") val numOfEpi: Int?
 )
 
 data class OpenedFairyResponse(
     @SerializedName("fairy_no") val fairyNo: Int?
+)
+
+data class CardData(
+    @SerializedName("card_no") val cardNo : Int?,
+    @SerializedName("img_url") val imgUrl : String?
 )
 
 interface ApiService {
@@ -43,4 +48,8 @@ interface ApiService {
     // 에피소드 진행 상황
     @GET("/FindUnlockEpi")
     fun openedEpi(@Query("id") userId: String?, @Query("fairy_no") fairyNo: Int): Call<OpenedEpiResponse>
+
+    // 유저가 모은 카드 데이터 가져오기
+    @GET("/getUserCards")
+    fun getUserCards(@Query("id") userId: String?): Call<List<CardData>>
 }

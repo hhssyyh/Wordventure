@@ -31,7 +31,7 @@ val client = OkHttpClient.Builder()
 
 // 서버 로그 보기
 object RetrofitClient {
-    private const val BASE_URL = "http://192.168.0.10:3306/"
+    private const val BASE_URL = "http://172.30.1.5:3306/"
 
     private val logging by lazy {
         val interceptor = HttpLoggingInterceptor()

@@ -15,9 +15,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.BaseActivity
 import com.example.wordventure.R
 
-class FairyActivity : AppCompatActivity() {
+class FairyActivity : BaseActivity() {
 
     private var openedEpi = 1
     private var fairyName = ""

@@ -16,38 +16,38 @@
         android:scaleType="centerCrop"
         android:src="@drawable/all_island"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="361dp" />
+        tools:layout_editor_absoluteY="0dp" />
 
     <ImageButton
-        android:id="@+id/gotoMain"
-        android:layout_width="280dp"
-        android:layout_height="265dp"
-        android:layout_marginTop="416dp"
-        android:background="@drawable/island"
+        android:id="@+id/gotoMyIsland"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="576dp"
+        android:background="@drawable/all_myisland"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/fairy_pig"
-        android:layout_width="280dp"
-        android:layout_height="265dp"
-        android:layout_marginTop="232dp"
-        android:background="@drawable/island"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="288dp"
+        android:background="@drawable/all_pig"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.672"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/fairy_turtle"
-        android:layout_width="280dp"
-        android:layout_height="265dp"
-        android:layout_marginTop="428dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/island"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.236"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

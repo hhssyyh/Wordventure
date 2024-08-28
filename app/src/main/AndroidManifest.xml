@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission-sdk-23 android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:usesCleartextTraffic="true"
@@ -15,7 +14,7 @@
         android:theme="@style/Theme.Wordventure"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".user.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,12 +23,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".BaseActivity"/>
+
         <activity android:name=".user.LoginActivity" />
         <activity android:name=".user.RegisterActivity" />
         <activity android:name=".user.LogoutActivity" />
+        <activity android:name=".user.MyIslandActivity"/>
 
         <activity android:name=".fairytale.FairyIslandActivity"/>
-        <activity android:name=".fairytale.FairyActivity"/>
+        <activity android:name=".fairytale.FairyActivity" />
         <activity android:name=".pig.Episode1" />
+
     </application>
 </manifest>

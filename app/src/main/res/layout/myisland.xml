@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainPage"
+    android:id="@+id/myIsland_page"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".user.MainActivity">
+    tools:context=".user.MyIslandActivity">
 
     <ImageView
         android:id="@+id/myIsland"
@@ -16,18 +16,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/main" />
+        android:src="@drawable/myisland" />
 
     <ImageButton
-        android:id="@+id/gotoFairyIsland"
-        android:layout_width="239dp"
-        android:layout_height="160dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/main_btrn"
+        android:id="@+id/collected_card"
+        android:layout_width="110dp"
+        android:layout_height="0dp"
+        android:background="@drawable/card_btn"
+        app:layout_constraintDimensionRatio="1:1.5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintHorizontal_bias="0.903"
+        app:layout_constraintVertical_bias="0.92" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
