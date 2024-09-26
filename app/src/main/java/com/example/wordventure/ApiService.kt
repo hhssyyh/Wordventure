@@ -24,8 +24,14 @@ data class OpenedFairyResponse(
 )
 
 data class CardData(
-    @SerializedName("card_no") val cardNo : Int?,
-    @SerializedName("img_url") val imgUrl : String?
+    @SerializedName("eng") val eng : String?,
+    @SerializedName("img") val img : String?
+)
+
+data class WordData(
+    @SerializedName("img") val img : String?,
+    @SerializedName("kor") val kr : String?,
+    @SerializedName("pronoun") val pron : String?
 )
 
 interface ApiService {
@@ -49,7 +55,15 @@ interface ApiService {
     @GET("/FindUnlockEpi")
     fun openedEpi(@Query("id") userId: String?, @Query("fairy_no") fairyNo: Int): Call<OpenedEpiResponse>
 
-    // 유저가 모은 카드 데이터 가져오기
-    @GET("/getUserCards")
+    // 유저가 모은 카드 데이터
+    @GET("/CollectedWords")
     fun getUserCards(@Query("id") userId: String?): Call<List<CardData>>
+
+    // 단어 데이터
+    @GET("/Cards")
+    fun getWordData(@Query("eng") eng: String?): Call<WordData>
+
+    // 학습한 단어 저장
+    @POST("/saveWords")
+    fun saveWords(@Query("id") userId: String?, @Query("vocabs") words: List<String>): Call<Unit>
 }

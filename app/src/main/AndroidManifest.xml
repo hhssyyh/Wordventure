@@ -32,7 +32,9 @@
 
         <activity android:name=".fairytale.FairyIslandActivity"/>
         <activity android:name=".fairytale.FairyActivity" />
-        <activity android:name=".pig.Episode1" />
+        <activity android:name=".fairytale.Episode" />
+
+        <activity android:name=".study.ReadFairyActivity" />
 
     </application>
 </manifest>

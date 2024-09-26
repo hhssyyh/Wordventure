@@ -33,7 +33,7 @@ class FairyIslandActivity : BaseActivity() {
         val allIslandImg: ImageView = findViewById(R.id.allFairyIsland)
         val gotoMyIslandBtn: ImageButton = findViewById(R.id.gotoMyIsland)
         val fairyPigBtn: ImageButton = findViewById(R.id.fairy_pig)
-        val fairyTurtleBtn: ImageButton = findViewById(R.id.fairy_turtle)
+//        val fairyTurtleBtn: ImageButton = findViewById(R.id.fairy_turtle)
 
         // 서버에서 동화 해금 정보 불러오기
         getOpenedFairy { openedFairyFromServer ->
@@ -43,14 +43,14 @@ class FairyIslandActivity : BaseActivity() {
 
             // 해금 정보에 따라 버튼 흑백 처리
             changeImageColor(fairyPigBtn, 1)
-            changeImageColor(fairyTurtleBtn, 2)
+//            changeImageColor(fairyTurtleBtn, 2)
 
             fairyPigBtn.setOnClickListener {
                 startFairy("pig", 1)
             }
-            fairyTurtleBtn.setOnClickListener {
-                startFairy("turtle", 2)
-            }
+//            fairyTurtleBtn.setOnClickListener {
+//                startFairy("turtle", 2)
+//            }
         }
 
         gotoMyIslandBtn.setOnClickListener {

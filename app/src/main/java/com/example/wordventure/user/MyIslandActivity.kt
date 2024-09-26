@@ -1,12 +1,14 @@
 package com.example.wordventure.user
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.wordventure.BaseActivity
 import com.example.wordventure.CardData
 import com.example.wordventure.R
@@ -58,7 +60,7 @@ class MyIslandActivity : BaseActivity() {
 
         // RecyclerView 설정
         val recyclerView: RecyclerView = dialogView.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 3) // 한 줄에 3개의 카드 배치
         recyclerView.adapter = CardAdapter(this, cards)
 
         // 다이얼로그 설정

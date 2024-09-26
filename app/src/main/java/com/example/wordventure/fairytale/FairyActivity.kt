@@ -40,7 +40,7 @@ class FairyActivity : BaseActivity() {
         val resId = resources.getIdentifier(fairyName, "drawable", packageName)
         fairyImg.setImageResource(resId)
 
-        //글자 넣어서 이미지 버튼 생성
+        // 글자 넣어서 이미지 버튼 생성
         for (i in 1..numberOfEpisodes) {
             // FrameLayout을 생성해 ImageButton과 TextView를 겹치기
             val frameLayout = FrameLayout(this).apply {
@@ -59,14 +59,20 @@ class FairyActivity : BaseActivity() {
                     FrameLayout.LayoutParams.MATCH_PARENT
                 )
                 contentDescription = "Episode $i"
+
                 setOnClickListener {
                     startEpisode(i)  // 클릭 시 startEpisode 함수 호출
                 }
 
                 // 만약 에피소드가 열리지 않은 상태라면 흑백 처리
                 if (i > openedEpi) {
+                    // Drawable을 복사하여 새로운 인스턴스를 사용
+                    val drawable = this.background?.mutate()  // background를 mutate하여 복사본 생성
                     val matrix = ColorMatrix().apply { setSaturation(0f) }  // 흑백 필터 적용
-                    colorFilter = ColorMatrixColorFilter(matrix)
+                    val filter = ColorMatrixColorFilter(matrix)
+
+                    drawable?.colorFilter = filter  // 흑백 필터 적용
+                    this.background = drawable  // 필터 적용된 Drawable을 다시 배경으로 설정
                     isEnabled = false  // 버튼 비활성화
                 }
             }
@@ -102,10 +108,9 @@ class FairyActivity : BaseActivity() {
         } else {
             try {
                 // 'Episode' + buttonId로 클래스 이름 생성
-                val className = "com.example.wordventure.$fairyName.Episode$buttonId"
-                val episodeClass = Class.forName(className)
-
-                val intent = Intent(this, episodeClass)
+                val intent = Intent(this, Episode::class.java)
+                intent.putExtra("fairy_name", fairyName)
+                intent.putExtra("epi_no", buttonId)
                 startActivity(intent)
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()

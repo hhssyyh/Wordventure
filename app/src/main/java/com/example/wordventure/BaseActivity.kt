@@ -50,7 +50,7 @@ open class BaseActivity : AppCompatActivity() {
             floatingImageButton = createOverlayButton()
 
             if (floatingImageButton != null) {
-                val sizeInDp = 100
+                val sizeInDp = 90
                 val sizeInPx = (sizeInDp * resources.displayMetrics.density).toInt()
 
                 val params = WindowManager.LayoutParams(
@@ -110,10 +110,6 @@ open class BaseActivity : AppCompatActivity() {
         popupView.findViewById<TextView>(R.id.action_fairy).setOnClickListener {
             popupWindow.dismiss()
             startActivity(Intent(this@BaseActivity, FairyIslandActivity::class.java))
-        }
-        popupView.findViewById<TextView>(R.id.action_my_page).setOnClickListener {
-            Toast.makeText(this, "마이페이지 선택됨", Toast.LENGTH_SHORT).show()
-            popupWindow.dismiss()
         }
         popupView.findViewById<TextView>(R.id.action_logout).setOnClickListener {
             popupWindow.dismiss()

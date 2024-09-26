@@ -25,14 +25,17 @@ class CardAdapter(
     }
 
     override fun getItemCount(): Int = cardList.size
-
     inner class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val cardImageView: ImageView = itemView.findViewById(R.id.cardImageView)
-//        private val cardNameTextView: TextView = itemView.findViewById(R.id.cardNameTextView)
+        private val cardNameTextView: TextView = itemView.findViewById(R.id.cardNameTextView)
 
         fun bind(card: CardData) {
-//            cardNameTextView.text = card.name
-            Glide.with(context).load(card.imgUrl).into(cardImageView) // Glide로 이미지 로드
+            cardNameTextView.text = card.eng
+//            Glide.with(context).load(card.img).into(cardImageView) // Glide로 이미지 로드
+            val resId = context.resources.getIdentifier("img_${card.eng}", "drawable", context.packageName)
+            if (resId != 0) {
+                Glide.with(context).load(resId).into(cardImageView)  // 리소스 ID로 Glide를 통해 이미지 로드
+            }
         }
     }
 }

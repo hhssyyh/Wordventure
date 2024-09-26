@@ -3,20 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:layout_gravity="center_horizontal"> <!-- 아이템 가운데 정렬 -->
 
-    <ImageView
-        android:id="@+id/cardImageView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitCenter"
-        android:contentDescription="card_img" />
+        android:layout_height="120dp">
+        <ImageView
+            android:id="@+id/card_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/card_bg"
+            android:scaleType="fitCenter"/>
 
-<!--    <TextView-->
-<!--        android:id="@+id/cardNameTextView"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:textSize="16sp"-->
-<!--        android:paddingTop="8dp"-->
-<!--        android:gravity="center" />-->
+        <ImageView
+            android:id="@+id/cardImageView"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitCenter"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/cardNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:paddingTop="8dp"
+            android:gravity="center" />
+    </FrameLayout>
+
 </LinearLayout>
