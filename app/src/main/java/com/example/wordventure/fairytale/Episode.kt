@@ -17,6 +17,7 @@ import com.example.wordventure.TokenManager
 import com.example.wordventure.WordData
 import com.example.wordventure.study.ReadFairyActivity
 import com.example.wordventure.study.StudyWordDialog
+import com.example.wordventure.user.MainActivity
 import com.example.wordventure.user.MyIslandActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -84,6 +85,10 @@ class Episode : BaseActivity() {
     }
 
     private fun addNextButton() {
+        // ConstraintLayout을 찾음
+        val parentLayout = findViewById<ConstraintLayout>(R.id.epi_layout)
+
+        // ImageButton 동적 생성
         val nextButton = ImageButton(this).apply {
             setImageResource(R.drawable.epi_next)
             val sizeInDp = 100
@@ -92,6 +97,11 @@ class Episode : BaseActivity() {
             layoutParams = ConstraintLayout.LayoutParams(sizeInPx, sizeInPx)
             background = null
             scaleType = ImageView.ScaleType.CENTER_INSIDE
+            layoutParams = ConstraintLayout.LayoutParams(sizeInPx, sizeInPx).apply {
+                bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID
+                endToEnd = ConstraintLayout.LayoutParams.PARENT_ID
+                setMargins(0, 0, 16.dp, 16.dp)  // 오른쪽 및 아래 여백 설정
+            }
 
             id = View.generateViewId()
 
@@ -120,14 +130,11 @@ class Episode : BaseActivity() {
             }
         }
 
-        val parentLayout: ConstraintLayout = findViewById(R.id.epi_layout)
+        // 동적으로 ImageButton을 추가
         parentLayout.addView(nextButton)
-
-        // 버튼 오른쪽 아래에 배치
-        val constraintSet = ConstraintSet()
-        constraintSet.clone(parentLayout)
-        constraintSet.connect(nextButton.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 20) // 오른쪽 여백
-        constraintSet.connect(nextButton.id, ConstraintSet.BOTTOM, ConstraintSet.PARENT_ID, ConstraintSet.BOTTOM, 25) // 아래 여백
-        constraintSet.applyTo(parentLayout)
     }
+
+    // dp 값을 px로 변환하는 확장 함수
+    private val Int.dp: Int
+        get() = (this * resources.displayMetrics.density).toInt()
 }

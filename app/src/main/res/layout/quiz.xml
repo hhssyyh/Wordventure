@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/epi_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="20dp"
+    android:background="#87F6F6"
+    tools:context=".fairytale.Episode">
+
+    <TextView
+        android:id="@+id/quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quiz"
+        android:textSize="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <TextView
+        android:id="@+id/quiz_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="화면 크기와 비율에 따라 유동적으로 배치되어야 하고, 화면의 비율에 맞춰 위치가 조정되어야 한다면 Vertical_bias를 사용하는 방법이 적합합니다."
+        android:textSize="17dp"
+        android:padding="10dp"
+        android:textColor="#87F6F6"
+        android:background="@drawable/rounded_background_white"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/quiz"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="70dp"/>
+
+    <TextView
+        android:id="@+id/answer1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="pig"
+        android:textSize="17dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background_white"
+        app:layout_constraintTop_toBottomOf="@id/quiz_text"
+        android:layout_marginTop="35dp"/>
+
+    <TextView
+        android:id="@+id/answer2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="house"
+        android:textSize="17dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background_white"
+        app:layout_constraintTop_toBottomOf="@id/answer1"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/answer3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:text="mother"
+        android:textSize="17dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:background="@drawable/rounded_background_white"
+        app:layout_constraintTop_toBottomOf="@id/answer2"
+        android:layout_marginTop="10dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

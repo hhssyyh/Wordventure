@@ -69,7 +69,13 @@ class MyIslandActivity : BaseActivity() {
             .setPositiveButton("닫기", null)
             .create()
 
+        // 다이얼로그의 배경을 둥글게 설정
+        dialog.window?.setBackgroundDrawableResource(R.drawable.rounded_background_brown)
+
         // 다이얼로그 표시
         dialog.show()
+
+        // 다이얼로그 표시 후 PositiveButton의 색상 변경
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)?.setTextColor(resources.getColor(android.R.color.white, null))
     }
 }

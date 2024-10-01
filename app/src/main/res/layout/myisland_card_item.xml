@@ -18,17 +18,19 @@
 
         <ImageView
             android:id="@+id/cardImageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:scaleType="fitCenter"
-            android:layout_gravity="center"/>
+            android:layout_gravity="top|center_horizontal"
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/cardNameTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
-            android:paddingTop="8dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="14dp"
             android:gravity="center" />
     </FrameLayout>
 

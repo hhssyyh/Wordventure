@@ -44,7 +44,7 @@ class FairyActivity : BaseActivity() {
         for (i in 1..numberOfEpisodes) {
             // FrameLayout을 생성해 ImageButton과 TextView를 겹치기
             val frameLayout = FrameLayout(this).apply {
-                layoutParams = LinearLayout.LayoutParams(300.dp, 300.dp).apply {
+                layoutParams = LinearLayout.LayoutParams(280.dp, 300.dp).apply {
                     setMargins(16.dp, 0, 16.dp, 0)  // 버튼 간격 설정 (마진 조정 가능)
                 }
             }
@@ -81,14 +81,15 @@ class FairyActivity : BaseActivity() {
             val textView = TextView(this).apply {
                 text = "Episode\n$i"
                 gravity = Gravity.CENTER
-                setTextColor(Color.BLACK)  // 텍스트 색상 설정
+                setTextColor(Color.WHITE)  // 텍스트 색상 설정
                 textSize = 25f  // 텍스트 크기 설정
                 typeface = Typeface.DEFAULT_BOLD  // 텍스트 스타일 설정
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    topMargin = 100.dp  // TextView를 위로 올리기 위해 topMargin 설정
+                    gravity = Gravity.CENTER  // TextView를 위로 올리기 위해 topMargin 설정
+                    topMargin = 35.dp
                 }
             }
 
