@@ -10,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.wordventure.MainActivity
+import com.example.wordventure.BaseActivity
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.User

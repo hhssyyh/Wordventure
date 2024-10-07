@@ -11,17 +11,18 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.wordventure.MainActivity
+import com.example.wordventure.BaseActivity
 import com.example.wordventure.OpenedEpiResponse
 import com.example.wordventure.OpenedFairyResponse
 import com.example.wordventure.R
 import com.example.wordventure.RetrofitClient
 import com.example.wordventure.TokenManager
+import com.example.wordventure.user.MyIslandActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class FairyIslandActivity : AppCompatActivity() {
+class FairyIslandActivity : BaseActivity() {
 
     private var openedFairy = 1;
 
@@ -30,9 +31,9 @@ class FairyIslandActivity : AppCompatActivity() {
         setContentView(R.layout.fairy_island)
 
         val allIslandImg: ImageView = findViewById(R.id.allFairyIsland)
-        val gotoMainBtn: ImageButton = findViewById(R.id.gotoMain)
+        val gotoMyIslandBtn: ImageButton = findViewById(R.id.gotoMyIsland)
         val fairyPigBtn: ImageButton = findViewById(R.id.fairy_pig)
-        val fairyTurtleBtn: ImageButton = findViewById(R.id.fairy_turtle)
+//        val fairyTurtleBtn: ImageButton = findViewById(R.id.fairy_turtle)
 
         // 서버에서 동화 해금 정보 불러오기
         getOpenedFairy { openedFairyFromServer ->
@@ -40,22 +41,20 @@ class FairyIslandActivity : AppCompatActivity() {
                 openedFairy = openedFairyFromServer
             }
 
-            openedFairy = 1
-
             // 해금 정보에 따라 버튼 흑백 처리
             changeImageColor(fairyPigBtn, 1)
-            changeImageColor(fairyTurtleBtn, 2)
+//            changeImageColor(fairyTurtleBtn, 2)
 
             fairyPigBtn.setOnClickListener {
                 startFairy("pig", 1)
             }
-            fairyTurtleBtn.setOnClickListener {
-                startFairy("turtle", 2)
-            }
+//            fairyTurtleBtn.setOnClickListener {
+//                startFairy("turtle", 2)
+//            }
         }
 
-        gotoMainBtn.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+        gotoMyIslandBtn.setOnClickListener {
+            val intent = Intent(this, MyIslandActivity::class.java)
             startActivity(intent)
         }
     }
@@ -105,14 +104,10 @@ class FairyIslandActivity : AppCompatActivity() {
             try {
                 getOpenedEpi(buttonId) { data ->
                     if (data != null) {
-                        val className = "com.example.wordventure.fairytale.FairyActivity"
-                        val episodeClass = Class.forName(className)
-
-                        val intent = Intent(this, episodeClass)
+                        val intent = Intent(this, FairyActivity::class.java)
                         intent.putExtra("fairy_name", fairyName)  // 동화명 전달
                         intent.putExtra("opened_epi", data.epiNo)  // 열린 에피소드 개수 전달
-//                        intent.putExtra("num_of_epi", data.numOfEpi)  // 총 에피소드 개수 전달
-                        intent.putExtra("num_of_epi", 10)
+                        intent.putExtra("num_of_epi", data.numOfEpi)  // 총 에피소드 개수 전달
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, "Failed to fetch episode number", Toast.LENGTH_SHORT).show()

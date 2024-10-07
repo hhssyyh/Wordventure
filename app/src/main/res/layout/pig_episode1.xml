@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/pigEpi1"
+    android:id="@+id/epi_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pig.Episode1">
+    tools:context=".fairytale.Episode">
 
     <ImageView
         android:id="@+id/epi_img"
@@ -16,26 +16,105 @@
         android:scaleType="centerCrop"
         android:layout_gravity="center" />
 
-    <TextView
-        android:id="@+id/epi_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아기돼지 삼형제 - 에피소드 1"
-        android:textSize="25dp"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
-        android:id="@+id/study_pig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/study_btn_1"
+        android:layout_width="250dp"
+        android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
-        android:src="@drawable/yajasoo"
+        android:src="@drawable/img_house"
+        android:tag="house"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.168" />
+
+    <ImageButton
+        android:id="@+id/study_btn_2"
+        android:tag="mother"
+        android:layout_width="180dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_mother"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/study_btn_1"
+        app:layout_constraintDimensionRatio="1:1.16"
+        app:layout_constraintEnd_toEndOf="@+id/study_btn_1"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <ImageView
+        android:id="@+id/pig_1"
+        android:layout_width="170dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_pig2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_btn_1"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.14"/>
+
+    <ImageView
+        android:id="@+id/pig_2"
+        android:layout_width="170dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_pig2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_btn_1"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.9"/>
+
+    <ImageButton
+        android:id="@+id/study_btn_3"
+        android:tag="pig"
+        android:layout_width="190dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/img_pig"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/study_btn_1"
+        app:layout_constraintVertical_bias="0.46" />
+
+
+    <ImageView
+        android:id="@+id/epi_read1"
+        android:layout_width="250dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/study_btn_1"
+        app:layout_constraintStart_toStartOf="@+id/study_btn_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintVertical_bias="0.3"/>
+
+    <ImageView
+        android:id="@+id/epi_read2"
+        android:layout_width="270dp"
+        android:layout_height="230dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/study_btn_2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/study_btn_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.7"
+        app:layout_constraintVertical_bias="0.3"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

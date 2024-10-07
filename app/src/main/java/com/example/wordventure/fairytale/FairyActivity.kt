@@ -15,9 +15,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.wordventure.BaseActivity
 import com.example.wordventure.R
 
-class FairyActivity : AppCompatActivity() {
+class FairyActivity : BaseActivity() {
 
     private var openedEpi = 1
     private var fairyName = ""
@@ -39,11 +40,11 @@ class FairyActivity : AppCompatActivity() {
         val resId = resources.getIdentifier(fairyName, "drawable", packageName)
         fairyImg.setImageResource(resId)
 
-        //글자 넣어서 이미지 버튼 생성
+        // 글자 넣어서 이미지 버튼 생성
         for (i in 1..numberOfEpisodes) {
             // FrameLayout을 생성해 ImageButton과 TextView를 겹치기
             val frameLayout = FrameLayout(this).apply {
-                layoutParams = LinearLayout.LayoutParams(300.dp, 300.dp).apply {
+                layoutParams = LinearLayout.LayoutParams(280.dp, 300.dp).apply {
                     setMargins(16.dp, 0, 16.dp, 0)  // 버튼 간격 설정 (마진 조정 가능)
                 }
             }
@@ -58,14 +59,20 @@ class FairyActivity : AppCompatActivity() {
                     FrameLayout.LayoutParams.MATCH_PARENT
                 )
                 contentDescription = "Episode $i"
+
                 setOnClickListener {
                     startEpisode(i)  // 클릭 시 startEpisode 함수 호출
                 }
 
                 // 만약 에피소드가 열리지 않은 상태라면 흑백 처리
                 if (i > openedEpi) {
+                    // Drawable을 복사하여 새로운 인스턴스를 사용
+                    val drawable = this.background?.mutate()  // background를 mutate하여 복사본 생성
                     val matrix = ColorMatrix().apply { setSaturation(0f) }  // 흑백 필터 적용
-                    colorFilter = ColorMatrixColorFilter(matrix)
+                    val filter = ColorMatrixColorFilter(matrix)
+
+                    drawable?.colorFilter = filter  // 흑백 필터 적용
+                    this.background = drawable  // 필터 적용된 Drawable을 다시 배경으로 설정
                     isEnabled = false  // 버튼 비활성화
                 }
             }
@@ -74,14 +81,15 @@ class FairyActivity : AppCompatActivity() {
             val textView = TextView(this).apply {
                 text = "Episode\n$i"
                 gravity = Gravity.CENTER
-                setTextColor(Color.BLACK)  // 텍스트 색상 설정
+                setTextColor(Color.WHITE)  // 텍스트 색상 설정
                 textSize = 25f  // 텍스트 크기 설정
                 typeface = Typeface.DEFAULT_BOLD  // 텍스트 스타일 설정
                 layoutParams = FrameLayout.LayoutParams(
                     FrameLayout.LayoutParams.MATCH_PARENT,
                     FrameLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
-                    topMargin = 100.dp  // TextView를 위로 올리기 위해 topMargin 설정
+                    gravity = Gravity.CENTER  // TextView를 위로 올리기 위해 topMargin 설정
+                    topMargin = 35.dp
                 }
             }
 
@@ -101,10 +109,9 @@ class FairyActivity : AppCompatActivity() {
         } else {
             try {
                 // 'Episode' + buttonId로 클래스 이름 생성
-                val className = "com.example.wordventure.$fairyName.Episode$buttonId"
-                val episodeClass = Class.forName(className)
-
-                val intent = Intent(this, episodeClass)
+                val intent = Intent(this, Episode::class.java)
+                intent.putExtra("fairy_name", fairyName)
+                intent.putExtra("epi_no", buttonId)
                 startActivity(intent)
             } catch (e: ClassNotFoundException) {
                 e.printStackTrace()
