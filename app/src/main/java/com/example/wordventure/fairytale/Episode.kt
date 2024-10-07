@@ -27,13 +27,17 @@ class Episode : BaseActivity() {
 
     private var spokenCount = 0
     private val totalWords = 3
-    private var fairyName = intent.getStringExtra("fairy_name") ?: ""
-    private var fairyNo = intent.getIntExtra("fairy_no", 1)
-    private var epiNo = intent.getIntExtra("epi_no", 1)
+    private var fairyName = ""
+    private var fairyNo = 1
+    private var epiNo = 1
     private val spokenWords = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        fairyName = intent.getStringExtra("fairy_name") ?: ""
+        fairyNo = intent.getIntExtra("fairy_no", 1)
+        epiNo = intent.getIntExtra("epi_no", 1)
 
         // 전달된 값으로 에피소드 레이아웃 매치
         val layoutName = "${fairyName}_episode${epiNo}"

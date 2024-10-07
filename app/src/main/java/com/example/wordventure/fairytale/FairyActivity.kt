@@ -20,13 +20,15 @@ import com.example.wordventure.R
 
 class FairyActivity : BaseActivity() {
 
-    private var openedEpi = intent.getIntExtra("opened_epi", 1)
-    private var fairyName = intent.getStringExtra("fairy_name") ?: ""
+    private var openedEpi = 1
+    private var fairyName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fairy)
 
+        openedEpi = intent.getIntExtra("opened_epi", 1)
+        fairyName = intent.getStringExtra("fairy_name") ?: ""
         val numberOfEpisodes = intent.getIntExtra("num_of_epi", 10)  // 총 에피소드 개수
 
         openedEpi = 1
