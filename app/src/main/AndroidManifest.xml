@@ -35,6 +35,7 @@
         <activity android:name=".fairytale.Episode" />
 
         <activity android:name=".study.ReadFairyActivity" />
+        <activity android:name=".study.QuizActivity" />
 
     </application>
 </manifest>

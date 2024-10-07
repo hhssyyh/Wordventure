@@ -16,11 +16,12 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class ReadFairyActivity : BaseActivity() {
+
+    private var fairyName = intent.getStringExtra("fairy_name") ?: ""
+    private var epiNo = intent.getIntExtra("epi_no", 1)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val fairyName = intent.getStringExtra("fairy_name") ?: ""
-        val epiNo = intent.getIntExtra("epi_no", 1)
 
         // 전달된 값으로 에피소드 레이아웃 매치
         val layoutName = "${fairyName}_episode${epiNo}"
@@ -107,7 +108,9 @@ class ReadFairyActivity : BaseActivity() {
             }
 
             setOnClickListener {
-                val intent = Intent(this@ReadFairyActivity, MainActivity::class.java)
+                val intent = Intent(this@ReadFairyActivity, QuizActivity::class.java)
+                intent.putExtra("fairy_name", fairyName)
+                intent.putExtra("epi_no", epiNo)
                 startActivity(intent)
                 finish()  // 현재 Activity 종료
             }

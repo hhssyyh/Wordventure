@@ -5,75 +5,110 @@
     android:id="@+id/epi_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="20dp"
-    android:background="#87F6F6"
-    tools:context=".fairytale.Episode">
+    tools:context=".study.QuizActivity">
+
+    <ImageView
+        android:id="@+id/epi_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/quiz_bg"
+        android:contentDescription="@string/myIsland"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center" />
 
     <TextView
-        android:id="@+id/quiz"
-        android:layout_width="wrap_content"
+        android:id="@+id/quiz_text"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:text="Quiz"
-        android:textSize="30dp"
+        android:text="화면 크기와 비율에 따라 유동적으로 배치되어야 하고, 화면의 비율에 맞춰 위치가 조정되어야 한다면 Vertical_bias를 사용하는 방법이 적합합니다."
+        android:textSize="17sp"
+        android:padding="10dp"
+        android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.3"/>
+        app:layout_constraintVertical_bias="0.365"/>
 
-    <TextView
-        android:id="@+id/quiz_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="화면 크기와 비율에 따라 유동적으로 배치되어야 하고, 화면의 비율에 맞춰 위치가 조정되어야 한다면 Vertical_bias를 사용하는 방법이 적합합니다."
-        android:textSize="17dp"
-        android:padding="10dp"
-        android:textColor="#87F6F6"
-        android:background="@drawable/rounded_background_white"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="@+id/quiz"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="70dp"/>
-
-    <TextView
-        android:id="@+id/answer1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="pig"
-        android:textSize="17dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:background="@drawable/rounded_background_white"
+    <FrameLayout
+        android:id="@+id/btn_layout1"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         app:layout_constraintTop_toBottomOf="@id/quiz_text"
-        android:layout_marginTop="35dp"/>
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/answer2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="house"
-        android:textSize="17dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:background="@drawable/rounded_background_white"
-        app:layout_constraintTop_toBottomOf="@id/answer1"
-        android:layout_marginTop="10dp"/>
+        <ImageButton
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:src="@drawable/quiz_btn"
+            android:scaleType="centerInside" />
 
-    <TextView
-        android:id="@+id/answer3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:text="mother"
-        android:textSize="17dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:background="@drawable/rounded_background_white"
-        app:layout_constraintTop_toBottomOf="@id/answer2"
-        android:layout_marginTop="10dp"/>
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. pig"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/btn_layout2"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_layout1"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:src="@drawable/quiz_btn"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. mother"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/btn_layout3"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_layout2"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:src="@drawable/quiz_btn"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/text3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. house"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
