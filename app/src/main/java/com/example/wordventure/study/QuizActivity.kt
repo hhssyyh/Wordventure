@@ -19,34 +19,36 @@ import retrofit2.Response
 class QuizActivity : AppCompatActivity() {
 
     private var fairyName = intent.getStringExtra("fairy_name") ?: ""
+    private var fairyNo = intent.getIntExtra("fairy_no", 1)
     private var epiNo = intent.getIntExtra("epi_no", 1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.quiz)
 
-        // 3개 단어 받아와서 그중 한개 그림으로(정답)
+        // 3개 단어 중 하나 골라서 이미지화
+        getQuizWord{ quizWords ->
 
+        }
     }
 
     // 해당 에피소드 단어들 가져오기
-//    private fun getQuizWord(callback: (Int?) -> Unit) {
-//        val userId = TokenManager.getUserId(this)
-//        val call = RetrofitClient.apiService.openedFairy(userId)
-//
-//        call.enqueue(object : Callback<OpenedFairyResponse> {
-//            override fun onResponse(call: Call<OpenedFairyResponse>, response: Response<OpenedFairyResponse>) {
-//                if (response.isSuccessful) {
-//                    callback(response.body()?.fairyNo ?: 1)
-//                } else {
-//                    Toast.makeText(this@FairyIslandActivity, "Server error", Toast.LENGTH_SHORT).show()
-//                    callback(null)
-//                }
-//            }
-//            override fun onFailure(call: Call<OpenedFairyResponse>, t: Throwable) {
-//                Toast.makeText(this@FairyIslandActivity, "Network error", Toast.LENGTH_SHORT).show()
-//                callback(null)
-//            }
-//        })
-//    }
+    private fun getQuizWord(callback: (List<String>?) -> Unit) {
+        val call = RetrofitClient.apiService.getQuizWord(fairyNo, epiNo)
+
+        call.enqueue(object : Callback<List<String>> {
+            override fun onResponse(call: Call<List<String>>, response: Response<List<String>>) {
+                if (response.isSuccessful) {
+                    callback(response.body())
+                } else {
+                    Toast.makeText(this@QuizActivity, "Server error", Toast.LENGTH_SHORT).show()
+                    callback(null)
+                }
+            }
+            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                Toast.makeText(this@QuizActivity, "Network error", Toast.LENGTH_SHORT).show()
+                callback(null)
+            }
+        })
+    }
 }

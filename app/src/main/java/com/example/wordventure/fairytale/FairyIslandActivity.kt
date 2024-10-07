@@ -106,6 +106,7 @@ class FairyIslandActivity : BaseActivity() {
                     if (data != null) {
                         val intent = Intent(this, FairyActivity::class.java)
                         intent.putExtra("fairy_name", fairyName)  // 동화명 전달
+                        intent.putExtra("fairy_no", buttonId)  // 동화번호 전달
                         intent.putExtra("opened_epi", data.epiNo)  // 열린 에피소드 개수 전달
                         intent.putExtra("num_of_epi", data.numOfEpi)  // 총 에피소드 개수 전달
                         startActivity(intent)

@@ -68,6 +68,6 @@ interface ApiService {
     fun saveWords(@Query("id") userId: String?, @Query("vocabs") words: List<String>): Call<Unit>
 
     // 퀴즈 단어 가져오기
-//    @GET("/getQuizWord")
-//    fun getQuizWord(@Query(""))
+    @GET("/getQuizWord")
+    fun getQuizWord(@Query("fairy_no") fairyNo: Int?, @Query("epi_no") epiNo: Int?): Call<List<String>>
 }

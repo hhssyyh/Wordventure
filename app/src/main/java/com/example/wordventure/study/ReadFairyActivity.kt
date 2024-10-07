@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 class ReadFairyActivity : BaseActivity() {
 
     private var fairyName = intent.getStringExtra("fairy_name") ?: ""
+    private var fairyNo = intent.getIntExtra("fairy_no", 1)
     private var epiNo = intent.getIntExtra("epi_no", 1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,6 +111,7 @@ class ReadFairyActivity : BaseActivity() {
             setOnClickListener {
                 val intent = Intent(this@ReadFairyActivity, QuizActivity::class.java)
                 intent.putExtra("fairy_name", fairyName)
+                intent.putExtra("fairy_no", fairyNo)
                 intent.putExtra("epi_no", epiNo)
                 startActivity(intent)
                 finish()  // 현재 Activity 종료
